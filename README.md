@@ -1,8 +1,10 @@
 ## DatabaseValidation
 
-We write a lot of validations in our ActiveRecord models that already exist inside of our database.  This gem seeks to automatically create those validations.
+We write a lot of validations in our ActiveRecord models that already exist inside of our database.  This gem automatically creates those validations.
 
 ### Usage
+
+We need more tools that use tools we already have
 
     class Thing < ActiveRecord::Base
       include DatabaseValidation
@@ -20,8 +22,14 @@ In the future:
 
 * all associations
 
+### Tested Adapters (probably others)
+
+* mysql
+* mysql2
+
 ### Installation
 
+    # in your Gemfile
     gem 'database_validation'
 
 ### Author
