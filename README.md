@@ -27,6 +27,7 @@ In the future:
 
 * mysql
 * mysql2
+* sqlite3
 
 ### Installation
 

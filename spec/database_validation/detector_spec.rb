@@ -1,7 +1,6 @@
 require "spec_helper"
 
 describe "DatabaseValidation" do
-
   after do
     User.delete_all
     Person.delete_all
@@ -49,7 +48,7 @@ describe "DatabaseValidation" do
       }.to_not raise_error
     end
     
-    it "should result association" do
+    it "should result direct association" do
       person.user.should == user
     end
   end
