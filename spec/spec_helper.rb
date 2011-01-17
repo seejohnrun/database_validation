@@ -1,7 +1,11 @@
-require File.dirname(__FILE__) + '/../lib/database_validation'
+ENV["RAILS_ENV"] = "test"
 
-ActiveRecord::Base.establish_connection(:adapter => 'mysql', :database => 'johnsql')
+require File.dirname(__FILE__) + "/../lib/database_validation"
+require "rspec/rails/extensions"
 
-def execute(sql)
-  ActiveRecord::Base.connection.execute(sql)
+ActiveRecord::Base.establish_connection(:adapter => "sqlite3", :database => ":memory:")
+
+load File.dirname(__FILE__) + "/schema.rb"
+%w[user person].each do |model|
+  load File.dirname(__FILE__) + "/support/#{model}.rb"
 end

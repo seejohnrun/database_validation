@@ -15,8 +15,9 @@ We need more tools that use tools we already have
 For now:
 
 * validates_uniquness_of (with scope)
-* validates_presence_of 
+* validates_presence_of
 * validates_length_of :maximum
+* belongs\_to
 
 In the future:
 
