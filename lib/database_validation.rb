@@ -14,7 +14,7 @@ module DatabaseValidation
       base.columns.each do |field|
         next if field.name == base.primary_key # don't add validations here
         allow_nil = field.null
-        base.send(:validates_length_of, field.name.to_sym, :maximum => field.limit, :allow_nil => allow_nil)
+        base.send(:validates_length_of, field.name.to_sym, :maximum => field.limit, :allow_nil => allow_nil) unless field.limit.nil?
         base.send(:validates_presence_of, field.name.to_sym, :allow_nil => allow_nil) unless allow_nil
       end
       ActiveRecord::Base.connection.indexes(base.table_name).each do |key|
