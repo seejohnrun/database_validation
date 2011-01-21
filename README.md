@@ -15,8 +15,9 @@ We need more tools that use tools we already have
 For now:
 
 * validates_uniquness_of (with scope)
-* validates_presence_of 
-* validates_length_of :maximum
+* validates_presence_of
+* validates_length_of :maximum, :allow_nil
+* validates_numericality_of :greater_than, :less_than, :allow_nil
 
 In the future:
 

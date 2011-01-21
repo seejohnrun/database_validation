@@ -3,7 +3,7 @@ require File.dirname(__FILE__) + '/../spec_helper'
 describe DatabaseValidation do
 
   before(:all) do
-    execute 'create table length1s (id int(11) auto_increment primary key, name varchar(10))'
+    execute 'create table length1s (id int(5) auto_increment primary key, name varchar(10), age smallint(1))'
     execute 'create table length2s (id int(11) auto_increment primary key, body text)'
   end
 
@@ -30,7 +30,24 @@ describe DatabaseValidation do
         include DatabaseValidation
       end
     end.should_not raise_error(ArgumentError)
+  end
 
+  it 'should properly validate length on integer fields' do
+    lambda do
+      Length1.create!(:age => 32769)
+    end.should raise_error(ActiveRecord::RecordInvalid)
+    lambda do
+      Length1.create!(:age => 32767)
+    end.should_not raise_error
+  end
+
+  it 'should properly validate length on integer fields minimum' do
+    lambda do
+      Length1.create!(:age => -32769)
+    end.should raise_error(ActiveRecord::RecordInvalid)
+    lambda do
+      Length1.create!(:age => -32768)
+    end.should_not raise_error
   end
 
 end
