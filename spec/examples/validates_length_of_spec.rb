@@ -3,7 +3,7 @@ require File.dirname(__FILE__) + '/../spec_helper'
 describe DatabaseValidation do
 
   before(:all) do
-    execute 'create table length1s (id int(5) auto_increment primary key, name varchar(10), age smallint(1))'
+    execute 'create table length1s (id int(5) auto_increment primary key, name varchar(10), age smallint(1), enabled tinyint(1))'
     execute 'create table length2s (id int(11) auto_increment primary key, body text)'
   end
 
@@ -47,6 +47,12 @@ describe DatabaseValidation do
     end.should raise_error(ActiveRecord::RecordInvalid)
     lambda do
       Length1.create!(:age => -32768)
+    end.should_not raise_error
+  end
+
+  it 'should not validate booleans against length restrictions' do
+    lambda do
+      Length1.create!(:enabled => true)
     end.should_not raise_error
   end
 

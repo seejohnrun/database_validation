@@ -23,7 +23,7 @@ module DatabaseValidation
           maximum = unsigned ? 2 ** (8 * field.limit) : 2 ** (8 * field.limit) / 2
           minimum = unsigned ? -(2 ** (8 * field.limit)) - 1 : -(2 ** (8 * field.limit) / 2) - 1
           base.send(:validates_numericality_of, field.name.to_sym, :less_than => maximum, :greater_than => minimum, :allow_nil => allow_nil)
-        else
+        elsif [:string, :text].include?(field.type)
           maximum = field.limit
           base.send(:validates_length_of, field.name.to_sym, :maximum => maximum, :allow_nil => allow_nil)
         end
