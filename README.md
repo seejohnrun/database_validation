@@ -16,6 +16,7 @@ For now:
 
 * validates_uniquness_of (with scope)
 * validates_presence_of
+* validates_inclusion_of (for booleans)
 * validates_length_of :maximum, :allow_nil
 * validates_numericality_of :greater_than, :less_than, :allow_nil
 
