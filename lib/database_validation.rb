@@ -13,11 +13,15 @@ module DatabaseValidation
     def self.detect_validations(base)
       base.columns.each do |field|
         next if field.name == base.primary_key # don't add validations here
-        allow_nil = field.null
-        
-        base.send(:validates_presence_of, field.name.to_sym, :allow_nil => allow_nil) unless allow_nil
-        next if field.limit.nil?
 
+        allow_nil = field.null
+        if field.type == :boolean
+          base.send(:validates_inclusion_of, field.name.to_sym, :in => [true, false]) unless allow_nil
+        else
+          base.send(:validates_presence_of, field.name.to_sym) unless allow_nil
+        end
+
+        next if field.limit.nil?
         if [:integer, :float].include?(field.type)
           unsigned = field.sql_type.include?('unsigned')
           maximum = unsigned ? 2 ** (8 * field.limit) : 2 ** (8 * field.limit) / 2

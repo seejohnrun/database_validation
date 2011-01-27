@@ -24,8 +24,8 @@ describe DatabaseValidation do
 
   it 'should be able to save a false value for a boolean' do
     lambda do
-      Presence1.create!(:enabled => false)
-    end
+      Presence1.create!(:enabled => false, :name => 'john')
+    end.should_not raise_error
   end
 
 end
