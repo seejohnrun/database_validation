@@ -3,7 +3,7 @@ require File.dirname(__FILE__) + '/../spec_helper'
 describe DatabaseValidation do
 
   before(:all) do
-    execute 'create table presence1s (id int(11) auto_increment primary key, name varchar(10) NOT NULL)'
+    execute 'create table presence1s (id int(11) auto_increment primary key, name varchar(10) NOT NULL, enabled tinyint(1) NOT NULL)'
   end
 
   before(:all) do
@@ -20,6 +20,12 @@ describe DatabaseValidation do
     lambda do
       Presence1.create!
     end.should raise_error(ActiveRecord::RecordInvalid)
+  end
+
+  it 'should be able to save a false value for a boolean' do
+    lambda do
+      Presence1.create!(:enabled => false)
+    end
   end
 
 end
