@@ -20,10 +20,6 @@ For now:
 * validates_length_of :maximum, :allow_nil
 * validates_numericality_of :greater_than, :less_than, :allow_nil
 
-In the future:
-
-* all associations
-
 ### Tested Adapters (probably others)
 
 * mysql
