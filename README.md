@@ -33,3 +33,7 @@ For now:
 ### Author
 
 John Crepezzi <john.crepezzi@gmail.com>
+
+### License
+
+MIT License.  See LICENSE.md
